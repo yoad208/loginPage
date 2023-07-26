@@ -1,0 +1,12 @@
+// email and password for login to mongodb atlas
+vesohim813@sportrid.com
+shalomK1234
+
+
+// username and password for db
+shalom
+shalomK1234
+
+
+// connection string for mongoDB atlas
+mongodb+srv://shalom:shalomK1234@cluster0.hrii9i9.mongodb.net/test
