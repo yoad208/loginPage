@@ -5,7 +5,9 @@ import Link from "next/link";
 interface Action {
     status: number,
     action: string,
-    message: string
+    message: string,
+    date: string,
+    time: string
 }
 
 function Actions() {
