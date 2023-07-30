@@ -17,7 +17,11 @@ model users {
   password String
 }
 
-model posts {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  text String
+model actions {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  status  Int
+  action  String
+  message String
+  date    String
+  time    String
 }

@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import '../styles/login.css';
+import axios from "axios";
 
 function Register() {
 
@@ -7,22 +8,31 @@ function Register() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch('http://localhost:3000/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: nameRef.current?.value,
-                email: emailRef.current?.value,
-                password: passwordRef.current?.value
-            })
-        }).then(() => {
-            window.location.href = '/login';
+        const {data} = await axios.post('http://localhost:3000/api/register', {
+            name: nameRef.current?.value,
+            email: emailRef.current?.value,
+            password: passwordRef.current?.value
         })
+
+        if (data?.success) {
+            await axios.post('http://localhost:3000/api/actionsTracker', {
+                status: 201,
+                action: 'Register',
+                message: 'Register successful',
+            })
+            window.location.href = '/login';
+        } else {
+            await axios.post('http://localhost:3000/api/actionsTracker', {
+                status: 403,
+                action: 'Register',
+                message: data?.error,
+            })
+            alert(data?.error);
+            window.location.reload();
+        }
     }
 
     return (

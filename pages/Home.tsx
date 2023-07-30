@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSearchParams} from "next/navigation";
 
+
 function Home() {
     const searchParams = useSearchParams()
     return (
